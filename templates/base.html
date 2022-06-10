@@ -1,0 +1,60 @@
+<html>
+<head>
+{% block head %}
+<title>
+{% block title %}Статистический анализ выборочных данных{% endblock %}
+</title>
+
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+{% endblock %}
+	 <style type="text/css">
+    #content{
+     width: 700px; /* Ширина слоя в пикселах */
+     background: #C0B28A; /* Цвет фона */
+     padding: 250px; /* Поля вокруг текста */
+     text-align: left; /* Выравнивание по левому краю */
+    }
+    #content * {
+     font-family: 'Times New Roman', Times, serif; /* Шрифт с засечками */
+     font-style: italic; /* Курсивное начертание */
+     font-size: 14pt;
+    }
+   </style>
+</head>
+<body style="background: #D2B48C;">
+
+
+
+<div id="main">
+	<div class="welcome">
+{% if user.is_authenticated %}
+		Вы зашли как: <em>{{user}}</em>. <a href="{% url "logout" %}">Выйти</a>
+{% else %}
+Вы не зашли как пользователь сайта. <a href="{% url "login" %}">Войдите</a> или
+	<a href="{% url "register" %}">зарегистрируйтесь</a>
+{% endif %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+	<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</div>
+	<div align="center">
+
+	<div id="content">
+	{% block content %}{% endblock %}
+
+	</div>
+
+	</div>
+
+</div>
+<div class="clear"></div>
+</div>
+
+</body>
+</html>

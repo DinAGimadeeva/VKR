@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Upload form. Note enctype attribute! -->
+    <a href="{% url "index" %}">Вернуться на главную страницу</a>
+    <h6>Название файла: {{csvfn}}</h6>
+
+    <h6>Статистики по столбцам:</h6>
+    <ol>
+    {% for s in stats%}
+    <li>
+        <b>Название переменной: {{s.varname}}</b>
+        <ul>
+        <li>Объём выборки: {{s.n}} </li>
+        <li>Среднее: {{s.mean}} </li>
+        <li>Медиана: {{s.median}} </li>
+        <li>Дисперсия: {{s.var}} </li>
+        <li>Ст. отклонение: {{s.std}} </li>
+        <li>0.25-квантиль: {{s.q25}} </li>
+        <li>0.75-квантиль: {{s.q75}} </li>
+        <li>Интерквартильная широта: {{s.iqr}} </li>
+
+        <p>Гистограмма:</p>
+        <p>{{ s.fhist|safe }}</p>
+        <p>ЭФР:</p>
+        <p>{{ s.fecdf|safe }}</p>
+        </ul>
+    </li>
+    {% endfor %}
+    </ol>
+
+    <h6>Совместная KDE-диаграмма:</h6>
+    {{ fpp2|safe }}
+
+    <h6>Совместная точечная диаграмма:</h6>
+    {{ fpp|safe }}
+{% endblock %}
+
+

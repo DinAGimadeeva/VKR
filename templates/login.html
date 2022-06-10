@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--Login-->
+<div class="container py-5">
+  <h1>Зайти на сайт</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ login_form }}
+    <button class="btn btn-primary" type="submit">Зайти как пользователь</button>
+  </form>
+  <p class="text-center">У вас нет аккаунта? <a href="/register">Создать новый аккаунт</a>.</p>
+</div>
+
+{% endblock %}
+
+
